@@ -1,0 +1,168 @@
+Django Revision 
+
+Model View Controller 
+--It drives both model and view 
+--Higly coupled (components are dependent on each other)
+--Examples are ASP.NET MVC, Spring MVC etc.
+
+Model View Template 
+--MVT has Views for receiving HTTP request and returning HTTP response.
+--Loosely coupled (components are independent of each other)
+--Django uses MVT pattern.
+
+Django is Model View Template 
+It is a software design pattern that has there components it -
+--Model :
+    Database releated/interfaces
+    Logic pf Databases
+--View
+    It contains many functions and this functions need to be targettted when invoked with the url
+    What you see in a browser
+    What you render in a website 
+--Template
+    Html Form for dynamic website 
+    where we send data to views is called template 
+
+User -->  URL website --> View <-- Model (Bringing data from models)
+                           |
+                           |
+                           Template(give data to the template)
+
+--Whenver we create a URL , we call a function and it calls to the view of the project 
+
+pip - It is the dependency manager of python 
+
+commands 
+* django-admin (To get all packages of django)
+* django-admin startproject mysite{project_name}
+* python manage.py runserver (to start the django server)
+
+
+** python -m venv/venv (creating a virtual python environment)
+** source venv/bin/activate
+
+PYTHON DJANGO DATA STRUCTURE 
+mysite 
+    mysite
+        settings.py (database manager)
+        urls.py (All the  urls of the project)
+        views.py (All the urls in urls.py are connected to views.py)
+        forms.py
+    db.sqlite
+    manage.py (to run/setup the project)
+    templates (html files)
+    static (css,javascript,images)
+    media (dynamic usage/files)
+
+Models 
+-- Tables which are releated to database are known as models 
+
+Django also create admin panel for database insert/delete/update
+* python manage.py createsuperuser (For creating superuser to view the admin panel)
+
+* python manage.py makemigrations
+* python manage.py migrate 
+
+URLS/Route 
+Types of urls -
+1. Direct website
+2. If any subpage need to be open urls are created 
+3. Detailed page 
+
+Views 
+--It prepares the data and display the HTML page (It in rendered when an url is called)
+--Two types 
+    Function based
+    Class based
+
+example 
+views.py
+    from django.http import HttpResponse
+    def functionName(request):
+        return(HttpResponse("Wwlcome to my page"))
+
+urls.py 
+    from folder_name import views 
+    path("URL NAME",views.functionName),
+    path('course/<int:item_id>,views.ItemsDetails)
+
+Template 
+--It will manage all the HTML files (index.html)
+--settings.py  
+    TEMPLATES {'DIRS':[BASE_DIR,"templates"]}
+    STATIC {'BASE_DIR',"static"}
+--views.py 
+    from django.shortcuts import render (It is used to render HTML files)
+    render(request,'index.html',{'data':data})
+
+FOR LOOP IN DJANGO 
+{% for n in data %}
+    <div>{{n}}</div>
+{% endfor %}
+
+{% include 'header.html' %} - include keyword is used here 
+{% extends 'base.html' %}
+{% block content %}
+----
+----
+{% endblock %}
+
+HTTP REQUEST METHOD 
+GET 
+    -As soon as you press the submit button that url gets GET methhod
+    -It is appended in the form of key and value pair
+    -? is used to send data and then & 
+    -1024 characters are only allowed
+    -Data is not secure not used for passwords
+    -no binary data, images and documents can be sent 
+
+POST 
+    -Transfers information via HTTP headers (store in the background of the page)
+    -No restriction 
+    -More secure 
+
+-- In views.py we use try and catch block to handle the request. Because first time error the value is null and may not be good
+
+CSRF token 
+--It is used to validate things in the background
+--It is used in POST method 
+-- {% csrf_token %}
+
+MIDDLEWARE
+--It is asoftware that different applications used to communicate with each other.
+--It provides functionality to connect applications intelligently
+--It is a bridge between diverse technologies , tools and databases so that they can be integrated in a sinle system
+
+Page Redirection - Redirecting a page after completing the login 
+
+Action 
+It says that the form is going to another page
+--When a form is submitted action attribute will hit another url on some another page is called as action url 
+--By default , it only hits the base url
+
+* python manage.py startapp service (For creating the models )
+-- Also connect this app in settings.py "INSTALLED APPS"
+
+service 
+    admin.py (All details of the admin)
+    models.py (All details of the models)
+
+models.py
+class LoginDetails(models.Model):
+    name=models.CharField(max_length=100)
+    phone_number=models.CharField(max_length=100)
+    email_address=models.CharField(max_length=100)
+    password=models.CharField(max_length=100)
+
+admin.py 
+class serviceAdmin(admin.ModelAdmin):
+    list_display=['name']
+
+admin.site.register(service,serviceAdmin)
+
+Queryset ()
+
+LoginDetails.object.all().filter(name="").filter().order_by('item_id')
+
+
+

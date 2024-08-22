@@ -1,0 +1,26 @@
+Docker File 
+
+docker-compose up id
+docker-compose start
+docker-compose exec
+
+docker-compose.yml
+src 
+    - ckeditor
+    - index.php
+
+docker-compose exec -it app sh
+
+composer require ckeditor/ckeditor
+
+docker-compose exec -it iu root app sh
+
+cp airbus-ca.crt/usr/local/share/ca-certificates
+
+cd/usr/local/share/ca-certificates
+
+docker-login docker-airbus-virtual.artifactory.2b82baws.cloud.airbus.corp
+
+npm --version 
+apt update
+apt intall node.js
